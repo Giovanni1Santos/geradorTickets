@@ -1,10 +1,16 @@
-/* Reset básico */
+/* 
+ * CSS completo para formulário de ingresso/ticket
+ * Contém estilos para: reset, layout, formulário, ticket e responsividade
+ */
+
+/* Reset básico - remove margens e paddings padrão de todos elementos */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* inclui padding e border na largura/altura */
 }
 
+/* Estilos gerais da página */
 body {
     font-family: "Montserrat", sans-serif;
     color: #404040;
@@ -12,13 +18,14 @@ body {
     height: 100vh;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #001f3f, #0074e4);
+    background: linear-gradient(135deg, #001f3f, #0074e4); /* gradiente azul */
     position: relative;
     overflow: hidden;
     padding: 50px 20px;
     flex-direction: column;
 }
 
+/* Efeito visual de overlay com gradiente radial */
 .overlay {
     position: absolute;
     top: 0;
@@ -26,9 +33,10 @@ body {
     width: 100%;
     height: 100%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
-    pointer-events: none;
+    pointer-events: none; /* permite interação com elementos abaixo */
 }
 
+/* Estilos de títulos */
 h1 {
     font-family: "Montserrat", sans-serif;
     font-size: 48px;
@@ -41,6 +49,7 @@ h2 {
     font-size: 24px;
 }
 
+/* Estilização do formulário principal */
 form {
     padding: 40px;
     background-color: #fff;
@@ -52,6 +61,7 @@ form {
     width: 100%;
 }
 
+/* Barra decorativa horizontal */
 .barra_horizontal {
     background-color: #1e89b5;
     height: 5px;
@@ -59,12 +69,14 @@ form {
     max-width: 210px;
 }
 
+/* Container para campos de input */
 .campo_input {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
+/* Estilização dos inputs */
 input {
     padding: 10px 20px;
     border-radius: 10px;
@@ -73,7 +85,7 @@ input {
     width: 100%;
 }
 
-/* Upload de foto */
+/* Área de upload de foto */
 .upload-container {
     border: 2px dashed rgba(0, 0, 0, 0.3);
     border-radius: 10px;
@@ -91,10 +103,10 @@ input {
     margin-bottom: 10px;
 }
 .upload-container input {
-    display: none;
+    display: none; /* esconde o input de arquivo padrão */
 }
 
-/* Botão Entrar */
+/* Estilização do botão principal */
 button {
     padding: 12px;
     align-self: center;
@@ -115,17 +127,7 @@ button:hover {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsividade */
-@media (max-width: 480px) {
-    h1 {
-        font-size: 28px;
-    }
-    form {
-        padding: 30px;
-    }
-}
-
-/* Estilo do Ticket */
+/* Estilos para o ticket/ingresso */
 #ticket {
     margin-top: 20px;
     width: 90%;
@@ -146,6 +148,7 @@ button:hover {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+/* Bolinhas decorativas nos cantos do ticket */
 #ticket::before, #ticket::after {
     content: "";
     position: absolute;
@@ -156,15 +159,10 @@ button:hover {
     top: 50%;
     transform: translateY(-50%);
 }
+#ticket::before { left: -20px; }
+#ticket::after { right: -20px; }
 
-#ticket::before {
-    left: -20px;
-}
-
-#ticket::after {
-    right: -20px;
-}
-
+/* Elementos internos do ticket */
 #ticketTitle {
     font-size: 22px;
     font-weight: bold;
@@ -172,14 +170,12 @@ button:hover {
     margin-bottom: 8px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
-
 #ticket p {
     font-size: 14px;
     color: #f1f1f1;
     margin: 4px 0;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
-
 #ticket img {
     width: 70px;
     height: 70px;
@@ -188,22 +184,20 @@ button:hover {
     object-fit: cover;
     margin-right: 15px;
 }
-
 .ticket-info {
     display: flex;
     align-items: center;
     margin-top: 15px;
 }
-
 #ticket:hover {
     transform: scale(1.05);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
+/* Animação de aparecimento suave */
 .fade-in {
     animation: fadeIn 0.5s ease-in-out;
 }
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -212,5 +206,15 @@ button:hover {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Media queries para responsividade */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 28px;
+    }
+    form {
+        padding: 30px;
     }
 }
