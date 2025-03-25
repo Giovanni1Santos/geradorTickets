@@ -8,11 +8,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const avatarInput = document.getElementById("avatar");
     const uploadContainer = document.querySelector(".upload-container");
     const infoText = document.querySelector(".info-text");
+    const h1Element = document.querySelector("h1"); // Seleciona o h1
+
+    // Criar elemento de mensagem de sucesso
+    const successMessage = document.createElement("p");
+    successMessage.textContent = "🎉 Parabéns, seu ticket está pronto!";
+    successMessage.style.fontSize = "20px";
+    successMessage.style.color = "#fff";
+    successMessage.style.marginTop = "20px";
+    successMessage.style.display = "none"; // Oculto inicialmente
+    successMessage.style.fontWeight = "bold";
+    document.body.insertBefore(successMessage, ticketSection); // Adiciona antes do ticket
 
     // Esconder o ticket inicialmente
     ticketSection.style.display = "none";
 
-    // Função para carregar a imagem e mostrar o carregamento
     function handleFile(file) {
         if (file) {
             const reader = new FileReader();
@@ -29,12 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Evento de mudança no input de arquivo
     avatarInput.addEventListener("change", function () {
         handleFile(this.files[0]);
     });
 
-    // Adicionar funcionalidade de arrastar e soltar
     uploadContainer.addEventListener("dragover", function (e) {
         e.preventDefault();
         uploadContainer.classList.add("drag-over");
@@ -50,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const file = e.dataTransfer.files[0];
         if (file) {
-            avatarInput.files = e.dataTransfer.files; // Define o arquivo no input
+            avatarInput.files = e.dataTransfer.files;
             handleFile(file);
         }
     });
@@ -58,24 +66,26 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        // Capturar os valores dos inputs
         const name = document.getElementById("name").value.trim();
         const email = document.getElementById("email").value.trim();
         const github = document.getElementById("github").value.trim();
 
-        // Validação básica
         if (!name || !email || !github) {
             alert("Por favor, preencha todos os campos obrigatórios.");
             return;
         }
 
-        // Exibir os dados no ticket
+        // Atualiza os dados do ticket
         ticketName.textContent = name;
         ticketEmail.textContent = email;
         ticketGithub.textContent = github;
 
-        // Esconder o formulário e exibir a seção do ticket com animação
+        // Oculta o formulário e o h1
         form.style.display = "none";
+        h1Element.style.display = "none";
+
+        // Exibe a mensagem e o ticket
+        successMessage.style.display = "block";
         ticketSection.style.display = "flex";
         ticketSection.classList.add("fade-in");
     });
